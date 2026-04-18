@@ -1,0 +1,17 @@
+{
+  "name": "@k9-finance-dao/airdrop-token-claim-registry",
+  "version": "0.0.0",
+  "private": true,
+  "description": "shadcn registry for the K9 TokenClaim merkle airdrop widget",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "prebuild": "node scripts/resolve-latest-deps.mjs",
+    "build": "echo 'TODO: wire shadcn build once the component lands' && exit 0",
+    "verify": "node scripts/resolve-latest-deps.mjs --dry-run"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.14.4"
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "k9",
+  "homepage": "https://k9-finance-dao.github.io/airdrop-token-claim",
+  "items": [
+    {
+      "name": "token-claim",
+      "type": "registry:block",
+      "title": "TokenClaim Widget",
+      "description": "Drop-in claim UI for the K9 TokenClaim merkle airdrop contract.",
+      "dependencies": [
+        "wagmi",
+        "viem",
+        "@tanstack/react-query",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "button",
+        "badge"
+      ],
+      "files": [],
+      "cssVars": {
+        "theme": {},
+        "light": {
+          "k9-claim-accent": "oklch(0.55 0.22 255)",
+          "k9-claim-radius": "1rem"
+        },
+        "dark": {
+          "k9-claim-accent": "oklch(0.62 0.22 255)",
+          "k9-claim-radius": "1rem"
+        }
+      }
+    }
+  ]
+}
