@@ -62,7 +62,25 @@ export type WalletAdapter = {
 
 export const DEFAULT_TERMS_TEXT = `These demo terms are intentionally fake.
 
-They exist so the reusable TermsQuiz component can be installed, rendered, and tested without importing any project's legal copy.
+They exist so the reusable TermsQuiz component can be installed, rendered, and tested without importing any project's legal copy. They are not legal advice, they are not a production agreement, and they should not be shown to real users as if they were approved terms.
+
+By continuing through this demo, you acknowledge that the purpose of this screen is to exercise the product flow: reading, scrolling, waiting briefly at the end, confirming acceptance, answering a comprehension quiz, and signing or attesting through a wallet callback. The words here are intentionally generic so that downstream projects can safely replace them.
+
+Production applications should replace this entire document with the final approved terms for the exact claim, drop, mint, access list, or other action being gated. The hash, URI, version number, claim contract list, and attestation payload should all refer to that approved document, not to these placeholder paragraphs.
+
+Users should be able to inspect what they are accepting before they sign. If a terms document is stored on IPFS, Arweave, GitHub, or another public location, the interface should make the canonical version clear. If the terms are later updated, the application should treat the new terms as a new version and require a new acknowledgement when appropriate.
+
+The quiz is a lightweight comprehension checkpoint. It does not replace legal review, compliance review, security review, or careful product design. Its job is to make sure the user has seen the major concepts before creating a signature or onchain attestation that can be referenced by the claim flow.
+
+Wallet signatures and onchain attestations may be public, permanent, or linkable to other activity depending on how the integrating application stores and submits them. A production app should explain whether the acknowledgement is a local signature, a backend record, an EAS attestation, a direct contract write, or another mechanism.
+
+If the flow writes to a blockchain, the user may pay gas, the transaction may fail, and the resulting record may be difficult or impossible to remove. If the flow uses an indexer, the interface should handle indexing delays gracefully and should not assume that a successful transaction appears in every external API immediately.
+
+The application should avoid hiding important restrictions inside dense text. Eligibility rules, deadlines, jurisdiction limitations, sanctions restrictions, claim windows, token risks, revocability, and support contact details should be presented clearly wherever they materially affect whether a user can or should continue.
+
+The user should not proceed if they do not understand the terms, do not control the connected wallet, are on the wrong network, believe the displayed document is stale, or suspect that the application is showing different terms from the version referenced by the attestation payload.
+
+Developers reusing this component are responsible for passing the final terms, final questions, correct answer explanations, wallet adapter, and attestation implementation. The component ships with these defaults only to make local development, previews, screenshots, and installer smoke tests work out of the box.
 
 Replace this text with your approved terms before using the component in production.`;
 
