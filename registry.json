@@ -8,7 +8,11 @@
       "type": "registry:block",
       "title": "TokenClaim Widget",
       "description": "Generic single-token Merkle airdrop claim widget for TokenClaim-style contracts.",
-      "dependencies": ["wagmi", "viem", "lucide-react"],
+      "dependencies": [
+        "wagmi@^3.6.16",
+        "viem@^2.52.0",
+        "lucide-react@^1.17.0"
+      ],
       "files": [
         {
           "path": "components/token-claim.tsx",
@@ -36,7 +40,9 @@
       "type": "registry:block",
       "title": "Terms Quiz",
       "description": "Reusable terms comprehension quiz with fake defaults and pluggable attestation callback.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react@^1.17.0"
+      ],
       "files": [
         {
           "path": "components/terms-quiz.tsx",
@@ -49,7 +55,10 @@
       "type": "registry:item",
       "title": "EAS Terms Kit",
       "description": "EAS terms attestation helpers, terms hashing/IPFS scripts, schema registration script, and runbook templates.",
-      "dependencies": ["wagmi", "viem"],
+      "dependencies": [
+        "wagmi@^3.6.16",
+        "viem@^2.52.0"
+      ],
       "files": [
         {
           "path": "lib/eas-terms.ts",

@@ -1,17 +1,36 @@
 {
-  "name": "@k9-finance-dao/airdrop-token-claim-registry",
-  "version": "0.0.0",
+  "name": "@k9-finance-dao/airdrop-toolkit-registry",
+  "version": "0.1.0",
   "private": true,
-  "description": "shadcn registry for the K9 TokenClaim merkle airdrop widget",
+  "description": "shadcn source registry for reusable Merkle airdrop and EAS terms tooling",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "prebuild": "node scripts/resolve-latest-deps.mjs",
-    "build": "echo 'TODO: wire shadcn build once the component lands' && exit 0",
-    "verify": "node scripts/resolve-latest-deps.mjs --dry-run"
+    "verify": "node scripts/resolve-latest-deps.mjs --dry-run",
+    "build": "node scripts/resolve-latest-deps.mjs",
+    "check-types": "tsc --noEmit",
+    "demo:dev": "vite --config demo/vite.config.ts",
+    "demo:build": "vite build --config demo/vite.config.ts",
+    "demo:preview": "vite preview --config demo/vite.config.ts",
+    "assets:install-browsers": "playwright install chromium",
+    "assets:screenshots": "pnpm demo:build && node scripts/capture-demo-screenshots.mjs",
+    "assets:all": "pnpm assets:screenshots && node scripts/verify-readme-assets.mjs"
   },
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@9.14.4"
+  "packageManager": "pnpm@9.14.4",
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "lucide-react": "^1.17.0",
+    "playwright": "^1.57.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.7",
+    "viem": "^2.52.0",
+    "wagmi": "^3.6.16"
+  }
 }

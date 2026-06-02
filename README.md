@@ -1,70 +1,106 @@
-# `@k9/airdrop-token-claim` — shadcn registry
+# K9 Airdrop Toolkit
 
-Drop-in React component for the [K9 Finance](https://k9finance.com) `TokenClaim` merkle airdrop contract, distributed via the [shadcn CLI registry](https://ui.shadcn.com/docs/registry).
+Reusable shadcn source registry for Merkle airdrop claim UIs, terms comprehension flows, and EAS terms attestation tooling.
 
-> **Status: scaffolding.** The registry infrastructure (build pipeline, freshness wiring, MIT license) is in place. The component itself is not yet published. See [SDK plan](#status-and-roadmap) for the open decisions and timeline.
+This repository is intended to be renamed from `airdrop-token-claim` to `airdrop-toolkit`. Until the GitHub repository rename is complete, install examples that use `K9-Finance-DAO/airdrop-toolkit/...` should be read as the target post-rename form.
 
-## What this is
+## Live Demo
 
-A single-token claim widget that any React/Tailwind dapp can install with one command:
+The static demo app is designed for GitHub Pages:
 
 ```bash
-npx shadcn@latest add @k9/airdrop-token-claim
+pnpm demo:dev
+pnpm demo:build
+pnpm demo:preview
 ```
 
-The component takes a contract address, a chain ID, and a proofs JSON URL — and renders an "Eligible / Claim / Already Claimed" UI that handles wallet connection, chain switching, allocation lookup, and the on-chain `claim()` call. Consumers own the source files after install (the shadcn idiom) and can restyle / rebrand freely.
+Target demo URL after the repository rename and Pages setup:
 
-For the K9 use case, render two `<TokenClaim />` components side by side (one for KNINE, one for esKNINE).
+```bash
+https://k9-finance-dao.github.io/airdrop-toolkit/
+```
 
-## Why this exists
+![K9 Airdrop Toolkit demo overview](docs/assets/readme/demo-overview.png)
 
-K9 Finance ships a public token claim flow. Other projects launching merkle airdrops have asked to reuse the UI rather than rebuild it. This repo packages it for drop-in use, with no coupling back to the K9 dapp's brand, scaffold-eth wrappers, or RainbowKit-specific assumptions.
+## Registry Items
 
-## Roadmap
+Install items independently:
 
-This initial commit ships:
+```bash
+pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/token-claim
+pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/terms-quiz
+pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/eas-terms-kit
+```
 
-- MIT LICENSE
-- `package.json` + `tsconfig.json` for the registry's own dev tooling
-- `registry.template.json` — schema-valid template with the dependency manifest, but no component yet
-- `scripts/resolve-latest-deps.mjs` — **freshness wiring**: rewrites the `dependencies` array in the template to whatever the latest stable version of each tracked package is on npm at registry-build time. Means a fresh `npx shadcn add` always installs the *current* latest of `wagmi`, `viem`, `@tanstack/react-query`, etc. — never a months-stale caret range.
-- `.gitignore`, `CHANGELOG.md`
+During the pre-rename transition, use the existing repo name:
 
-Not yet shipped (planned next):
+```bash
+pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-token-claim/token-claim
+pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-token-claim/terms-quiz
+pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-token-claim/eas-terms-kit
+```
 
-- The component source files (`token-claim.tsx`, `use-merkle-proofs.ts`, `token-claim-abi.ts`, `format-token-amount.ts`, `is-user-rejected.ts`)
-- A live demo site (Next.js, deployed to GitHub Pages or Vercel) at the registry's homepage
-- CI: `prebuild → shadcn build → deploy public/r/ to gh-pages` on every push to `main`
-- CI: weekly cron that scaffolds the component into a fresh Next 15 + RainbowKit project and runs a smoke test, catching breakage from upstream wagmi/viem majors before users do
-- Renovate or Dependabot for the registry's dev-deps
+### `token-claim`
 
-See the [SDK architecture plan](https://github.com/K9-Finance-DAO/airdrop-token-claim/issues/1) (TBD: file as a tracking issue once the repo's settled) for the seven open architectural decisions and the per-phase effort estimate (~3.5–4.5 days for v1).
+Generic single-token claim widget for an EIP-1167-style `TokenClaim` contract with static proofs JSON loading, wallet eligibility lookup, `isClaimed(address)`, `claim(uint256,bytes32[])`, and clear malformed-proof states.
 
-## Freshness model (the staleness fix)
+Render one widget per token. For a two-token airdrop, render two instances side by side.
 
-Naive shadcn registries hand-pin caret ranges (`wagmi@^2.12.0`) in the published JSON. Six months later, a fresh `shadcn add` still installs that 2.x range even though the latest is 3.x. We avoid that with two layers:
+![Token claim widget states](docs/assets/readme/token-claim-states.png)
 
-**1. Build-time `prebuild` script** — `scripts/resolve-latest-deps.mjs` queries `npm view <pkg> version` for every tracked dep at registry-build time and writes the resolved `<pkg>@^<latest>` into `registry.json`. Every push to `main` rebuilds the published registry from current npm state.
+### `terms-quiz`
 
-**2. Renovate (planned)** — keeps the registry's own dev-deps and the demo site current. Patch/minor PRs auto-merge once CI passes; majors get a manual review with a smoke-test against a fresh Next + RainbowKit project.
+Brand-neutral terms comprehension flow with fake default terms/questions. Consumers pass their own `termsText`, `questions`, wallet adapter, and optional `onAttest` implementation.
 
-The combination means consumers always get current-day latest at install, the registry source itself stays current, and breaking-change discovery happens in our CI before it reaches downstream installs.
+![Terms quiz demo](docs/assets/readme/terms-quiz.png)
 
-## Distribution mechanics
+### `eas-terms-kit`
 
-- **Hosting:** GitHub Pages serves `public/r/*.json` (output of `shadcn build`) at `https://k9-finance-dao.github.io/airdrop-token-claim/r/`. A custom domain may be added later.
-- **Versioning:** shadcn registries are fetch-time, no lockfile. Pin a specific version by URL: `https://k9-finance-dao.github.io/airdrop-token-claim/r/v1/token-claim.json`. The `…/r/token-claim.json` alias always points at latest.
-- **Consumer install (once the component ships):**
-  ```bash
-  npx shadcn@latest add @k9/airdrop-token-claim
-  # or by URL:
-  npx shadcn@latest add https://k9-finance-dao.github.io/airdrop-token-claim/r/token-claim.json
-  ```
+Reusable EAS helpers and operational files:
+
+- terms payload encoding
+- Base EAS constants and Base EASScan links
+- `useEasTermsAttest`
+- `useHasTermsAttestation`
+- terms hash/IPFS preparation script
+- schema registration script
+- runbook and terms template
+
+The v1 EAS kit is Base-first by default. This keeps the install path simple for Base airdrops and avoids pretending other chains have identical explorer/indexer behavior. Advanced consumers can override EAS addresses and explorer URLs in code if they intentionally adapt the kit.
+
+![Base-first EAS terms flow](docs/assets/readme/eas-flow.png)
+
+![EAS terms kit demo](docs/assets/readme/eas-terms-kit.png)
+
+## Public Airdrop Data
+
+The reusable toolkit does not own snapshot/proof data. Keep public allocations in a separate immutable data repository, such as:
+
+```bash
+https://github.com/K9-Finance-DAO/airdrop-data
+```
+
+Production dapps should pin proof URLs to a commit SHA:
+
+```bash
+https://raw.githubusercontent.com/K9-Finance-DAO/airdrop-data/<commit-sha>/base-mainnet/<YYYY-MM>/airdropProofs.knine.json
+```
+
+## Registry Model
+
+This is a shadcn GitHub source registry. The CLI reads `registry.json` directly from the public repository. No GitHub Pages build output is required for v1.
+
+## README Assets
+
+Screenshots are generated manually, not in CI:
+
+```bash
+pnpm assets:install-browsers
+pnpm assets:screenshots
+```
+
+The EAS flow diagram is a fixed generated PNG at `docs/assets/readme/eas-flow.png`. Replace it manually only when the documented flow materially changes.
 
 ## License
 
-[MIT](./LICENSE). Copyright © 2026 K9 Finance DAO.
-
-## Maintainer
-
-K9 Finance DAO. See git history for individual contributors.
+[MIT](./LICENSE). Copyright 2026 K9 Finance DAO.
