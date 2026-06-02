@@ -41,7 +41,9 @@
       "title": "Terms Quiz",
       "description": "Reusable terms comprehension quiz with fake defaults and pluggable attestation callback.",
       "dependencies": [
-        "lucide-react@^1.17.0"
+        "lucide-react@^1.17.0",
+        "wagmi@^3.6.16",
+        "viem@^2.52.0"
       ],
       "files": [
         {

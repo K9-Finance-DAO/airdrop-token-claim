@@ -35,6 +35,15 @@ async function waitForServer(url, timeoutMs = 20_000) {
   throw new Error(`Timed out waiting for ${url}`);
 }
 
+async function expectEnabled(locator, timeoutMs = 10_000) {
+  const started = Date.now();
+  while (Date.now() - started < timeoutMs) {
+    if (await locator.isEnabled()) return;
+    await wait(100);
+  }
+  throw new Error("Timed out waiting for enabled control.");
+}
+
 async function main() {
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
   const server = spawn(
@@ -51,8 +60,16 @@ async function main() {
 
     for (const [testId, fileName] of shots) {
       if (testId === "terms-quiz") {
-        await page.getByRole("button", { name: /start quiz/i }).click();
+        const section = page.locator(`[data-screenshot="${testId}"]`);
+        await section.locator(".stq-terms-scroll").evaluate(element => {
+          element.scrollTop = element.scrollHeight;
+        });
+        await page.waitForTimeout(3300);
+        await section.getByRole("button", { name: /i have read and accept/i }).click();
+        await expectEnabled(section.getByRole("button", { name: /start the quiz/i }));
+        await section.getByRole("button", { name: /start the quiz/i }).click();
         await page.getByText(/what should a production app do/i).waitFor();
+        await page.waitForTimeout(900);
       }
 
       const locator = page.locator(`[data-screenshot="${testId}"]`);
