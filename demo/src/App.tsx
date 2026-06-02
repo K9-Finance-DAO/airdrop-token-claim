@@ -50,9 +50,9 @@ export function App() {
               terms attestation helpers.
             </p>
             <div className="installBox">
-              <code>pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/token-claim</code>
-              <code>pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/terms-quiz</code>
-              <code>pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/eas-terms-kit</code>
+              <code>pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-token-claim/token-claim</code>
+              <code>pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-token-claim/terms-quiz</code>
+              <code>pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-token-claim/eas-terms-kit</code>
             </div>
           </div>
           <div className="heroPanel">

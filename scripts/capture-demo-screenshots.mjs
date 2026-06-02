@@ -7,7 +7,7 @@ import { chromium } from "playwright";
 
 const PORT = 4173;
 const HOST = "127.0.0.1";
-const BASE_URL = `http://${HOST}:${PORT}/airdrop-toolkit/`;
+const BASE_URL = `http://${HOST}:${PORT}/airdrop-token-claim/`;
 const OUTPUT_DIR = path.resolve("docs/assets/readme");
 
 const shots = [

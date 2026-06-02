@@ -2,8 +2,6 @@
 
 Reusable shadcn source registry for Merkle airdrop claim UIs, terms comprehension flows, and EAS terms attestation tooling.
 
-This repository is intended to be renamed from `airdrop-token-claim` to `airdrop-toolkit`. Until the GitHub repository rename is complete, install examples that use `K9-Finance-DAO/airdrop-toolkit/...` should be read as the target post-rename form.
-
 ## Live Demo
 
 The static demo app is designed for GitHub Pages:
@@ -14,10 +12,10 @@ pnpm demo:build
 pnpm demo:preview
 ```
 
-Target demo URL after the repository rename and Pages setup:
+Demo URL:
 
 ```bash
-https://k9-finance-dao.github.io/airdrop-toolkit/
+https://k9-finance-dao.github.io/airdrop-token-claim/
 ```
 
 ![K9 Airdrop Toolkit demo overview](docs/assets/readme/demo-overview.png)
@@ -25,14 +23,6 @@ https://k9-finance-dao.github.io/airdrop-toolkit/
 ## Registry Items
 
 Install items independently:
-
-```bash
-pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/token-claim
-pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/terms-quiz
-pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/eas-terms-kit
-```
-
-During the pre-rename transition, use the existing repo name:
 
 ```bash
 pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-token-claim/token-claim

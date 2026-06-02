@@ -7,12 +7,6 @@ The v1 kit is Base-first by default. It does not expose an environment chain enu
 ## 1. Install the kit
 
 ```bash
-pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-toolkit/eas-terms-kit
-```
-
-Before the repository rename is complete, use:
-
-```bash
 pnpm dlx shadcn@latest add K9-Finance-DAO/airdrop-token-claim/eas-terms-kit
 ```
 
