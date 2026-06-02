@@ -36,7 +36,7 @@
       "type": "registry:block",
       "title": "Terms Quiz",
       "description": "Reusable terms comprehension quiz with fake defaults and pluggable attestation callback.",
-      "dependencies": ["lucide-react"],
+      "dependencies": ["lucide-react", "wagmi", "viem"],
       "files": [
         {
           "path": "components/terms-quiz.tsx",
