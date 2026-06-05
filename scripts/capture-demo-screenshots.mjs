@@ -68,7 +68,7 @@ async function main() {
         await section.getByRole("button", { name: /i have read and accept/i }).click();
         await expectEnabled(section.getByRole("button", { name: /start the quiz/i }));
         await section.getByRole("button", { name: /start the quiz/i }).click();
-        await page.getByText(/what should a production app do/i).waitFor();
+        await page.getByText(/what does signing this attestation actually do/i).waitFor();
         await page.waitForTimeout(900);
       }
 
