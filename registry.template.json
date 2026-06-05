@@ -41,6 +41,22 @@
         {
           "path": "components/terms-quiz.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "hooks/use-terms-wallet.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "lib/terms-quiz-data.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/terms-quiz-types.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/terms-quiz-utils.ts",
+          "type": "registry:lib"
         }
       ]
     },

@@ -10,7 +10,7 @@
       "description": "Generic single-token Merkle airdrop claim widget for TokenClaim-style contracts.",
       "dependencies": [
         "wagmi@^3.6.16",
-        "viem@^2.52.0",
+        "viem@^2.52.2",
         "lucide-react@^1.17.0"
       ],
       "files": [
@@ -43,12 +43,28 @@
       "dependencies": [
         "lucide-react@^1.17.0",
         "wagmi@^3.6.16",
-        "viem@^2.52.0"
+        "viem@^2.52.2"
       ],
       "files": [
         {
           "path": "components/terms-quiz.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "hooks/use-terms-wallet.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "lib/terms-quiz-data.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/terms-quiz-types.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/terms-quiz-utils.ts",
+          "type": "registry:lib"
         }
       ]
     },
@@ -59,7 +75,7 @@
       "description": "EAS terms attestation helpers, terms hashing/IPFS scripts, schema registration script, and runbook templates.",
       "dependencies": [
         "wagmi@^3.6.16",
-        "viem@^2.52.0"
+        "viem@^2.52.2"
       ],
       "files": [
         {
